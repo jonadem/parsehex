@@ -66,10 +66,11 @@ class IntelHexRecord(object):
             cs=raw_hex(self.checksum))
 
     def to_extended_with_comment(self, offset=0):
-        comment = "{} byte {} record @ {}".format(
+        comment = "{} byte {} record @ {} {}".format(
             self.bytecount,
             IntelHexRecord.records[self.recordtype],
-            self.addr + offset)
+            self.addr + offset,
+            "".join([chr(i) for i in self.data]))
 
         if not self.is_checksum_ok():
             comment = comment + " Checksum error!"
